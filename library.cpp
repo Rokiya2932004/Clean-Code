@@ -60,6 +60,7 @@ public:
 class library
 {
     deque<Book> Available_books;
+    bool Is_borrowed_Book = false;
 
 public:
     library()
@@ -91,38 +92,69 @@ int main()
     {
         is_first_time = true;
     }
-
-    if (is_first_time)
+    bool end_programe = false;
+    char answer_to_end_program;
+    while (!end_programe)
     {
-        string bookName, bookAuthor;
-        int bookID;
-        cout << "Enter Book Name: ";
-        cin.ignore();
-        getline(cin, bookName);
-
-        cout << "Enter Book Author: ";
-        getline(cin, bookAuthor);
-
-        cout << "Enter Book ID: ";
-        cin >> bookID;
-
-        Book wantedBook(bookName, bookAuthor, bookID);
-        patorn_data.borrowBook(wantedBook);
-        cout << "\nBook borrowed successfully." << endl;
-    }
-
-    else
-    {
-        cout << "Enter the Book ID you want to check:\n ";
-        int wanted_book_ID;
-        cin >> wanted_book_ID;
-        if (patorn_data.isBorrowedBook(wanted_book_ID))
+        if (is_first_time)
         {
-            cout << "The book is borrowed." << endl;
+            string bookName, bookAuthor;
+            int bookID;
+            cout << "Enter Book Name: ";
+            cin.ignore();
+            getline(cin, bookName);
+
+            cout << "Enter Book Author: ";
+            getline(cin, bookAuthor);
+
+            cout << "Enter Book ID: ";
+            cin >> bookID;
+
+            Book wantedBook(bookName, bookAuthor, bookID);
+            patorn_data.borrowBook(wantedBook);
+            cout << "\nBook borrowed successfully." << endl;
+            cout << "Do you want to save changes ? (y , n)" << endl;
+            cin >> answer_to_end_program;
+            if (answer_to_end_program == 'y')
+            {
+                cout << "saved successfully";
+                end_programe = true;
+            }
+        }
+        if (is_first_time)
+        {
+            cout << "Enter the Book ID you want to check:\n ";
+            int wanted_book_ID;
+            cin >> wanted_book_ID;
+            if (patorn_data.isBorrowedBook(wanted_book_ID))
+            {
+                cout << "The book is borrowed now ." << endl;
+            }
+            else
+            {
+                cout << "The book is available." << endl;
+            }
+            cout << "Do you want to save changes ? (y , n)" << endl;
+            cin >> answer_to_end_program;
+            if (answer_to_end_program == 'y')
+            {
+                cout << "saved successfully";
+                end_programe = true;
+            }
         }
         else
         {
-            cout << "The book is available." << endl;
+            cout << "Enter the Book ID you want to check:\n ";
+            int wanted_book_ID;
+            cin >> wanted_book_ID;
+            if (patorn_data.isBorrowedBook(wanted_book_ID))
+            {
+                cout << "The book is borrowed." << endl;
+            }
+            else
+            {
+                cout << "The book is available." << endl;
+            }
         }
     }
 }
